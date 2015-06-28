@@ -1,0 +1,20 @@
+<%= simple_form_for(@donation) do |f| %>
+  <%= f.error_notification %>
+
+  <div class="form-inputs">
+    <%= f.input :item_description %>
+    <%= f.input :brand %>
+    <%= f.input :lot_number %>
+    <%= f.input :expiration_date %>
+    <%= f.input :fair_market_value %>
+    <%= f.input :mk_cost %>
+    <%= f.input :total_in_kind_value %>
+    <%= f.association :donor %>
+    <%= f.input :quantity %>
+    <%= f.association :inventory %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.button :submit %>
+  </div>
+<% end %>

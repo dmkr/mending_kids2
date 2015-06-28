@@ -1,0 +1,43 @@
+<h1>Listing donations</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item description</th>
+      <th>Brand</th>
+      <th>Lot number</th>
+      <th>Expiration date</th>
+      <th>Fair market value</th>
+      <th>Mk cost</th>
+      <th>Total in kind value</th>
+      <th>Donor</th>
+      <th>Quantity</th>
+      <th>Inventory</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @donations.each do |donation| %>
+      <tr>
+        <td><%= donation.item_description %></td>
+        <td><%= donation.brand %></td>
+        <td><%= donation.lot_number %></td>
+        <td><%= donation.expiration_date %></td>
+        <td><%= donation.fair_market_value %></td>
+        <td><%= donation.mk_cost %></td>
+        <td><%= donation.total_in_kind_value %></td>
+        <td><%= donation.donor %></td>
+        <td><%= donation.quantity %></td>
+        <td><%= donation.inventory %></td>
+        <td><%= link_to 'Show', donation %></td>
+        <td><%= link_to 'Edit', edit_donation_path(donation) %></td>
+        <td><%= link_to 'Destroy', donation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Donation', new_donation_path %>
