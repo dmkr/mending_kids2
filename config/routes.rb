@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :donors
+
   resources :missions
 
   resources :inventories
