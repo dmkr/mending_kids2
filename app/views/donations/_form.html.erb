@@ -1,20 +1,58 @@
-<%= simple_form_for(@donation) do |f| %>
-  <%= f.error_notification %>
-
-  <div class="form-inputs">
-    <%= f.input :item_description %>
-    <%= f.input :brand %>
-    <%= f.input :lot_number %>
-    <%= f.input :expiration_date %>
-    <%= f.input :fair_market_value %>
-    <%= f.input :mk_cost %>
-    <%= f.input :total_in_kind_value %>
-    <%= f.association :donor %>
-    <%= f.input :quantity %>
-    <%= f.association :inventory %>
+<%= form_for @donation, :html => { :class => 'form-horizontal form-model' } do |f| %>
+  <div class="form-group">
+    <%= f.label :item_description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :item_description, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :brand, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :brand, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :lot_number, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :lot_number, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :expiration_date, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.date_select :expiration_date, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :fair_market_value, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :fair_market_value, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :mk_cost, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :mk_cost, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :total_in_kind_value, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :total_in_kind_value, :class => 'text-field form-control' %>
+    </div>
+  </div>
+  <div class="form-group">
+    <%= f.label :quantity, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.number_field :quantity, :class => 'text-field form-control' %>
+    </div>
   </div>
 
-  <div class="form-actions">
-    <%= f.button :submit %>
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  donations_path, :class => 'btn btn-default' %>
+    </div>
   </div>
 <% end %>

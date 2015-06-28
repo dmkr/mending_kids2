@@ -1,25 +1,27 @@
-<h1>Listing donations</h1>
-
-<table>
+<%- model_class = Donation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => Donation %></h1>
+</div>
+<table class="table table-striped">
   <thead>
     <tr>
-      <th>Item description</th>
-      <th>Brand</th>
-      <th>Lot number</th>
-      <th>Expiration date</th>
-      <th>Fair market value</th>
-      <th>Mk cost</th>
-      <th>Total in kind value</th>
-      <th>Donor</th>
-      <th>Quantity</th>
-      <th>Inventory</th>
-      <th colspan="3"></th>
+      <th>ID</th>
+      <th><%= model_class.human_attribute_name(:item_description) %></th>
+      <th><%= model_class.human_attribute_name(:brand) %></th>
+      <th><%= model_class.human_attribute_name(:lot_number) %></th>
+      <th><%= model_class.human_attribute_name(:expiration_date) %></th>
+      <th><%= model_class.human_attribute_name(:fair_market_value) %></th>
+      <th><%= model_class.human_attribute_name(:mk_cost) %></th>
+      <th><%= model_class.human_attribute_name(:total_in_kind_value) %></th>
+      <th><%= model_class.human_attribute_name(:quantity) %></th>
+      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
-
   <tbody>
     <% @donations.each do |donation| %>
       <tr>
+        <td><%= donation.id %></td>
         <td><%= donation.item_description %></td>
         <td><%= donation.brand %></td>
         <td><%= donation.lot_number %></td>
@@ -27,17 +29,22 @@
         <td><%= donation.fair_market_value %></td>
         <td><%= donation.mk_cost %></td>
         <td><%= donation.total_in_kind_value %></td>
-        <td><%= donation.donor %></td>
         <td><%= donation.quantity %></td>
-        <td><%= donation.inventory %></td>
-        <td><%= link_to 'Show', donation %></td>
-        <td><%= link_to 'Edit', edit_donation_path(donation) %></td>
-        <td><%= link_to 'Destroy', donation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%=l donation.created_at, format: :long %></td>
+        <td>
+          <%= link_to donation_path(donation), :class => 'btn btn-xs', :title => "#{ t('.show', :default => t('helpers.links.show')) }" do %>
+            <%= glyph 'info-sign' %>
+            <%= glyph 'pencil' %>
+          <%- end -%>
+          <%= link_to donation_path(donation), :method => :delete, :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) }, :class => 'btn btn-xs', :title => "#{ t('.destroy', :default => t('helpers.links.destroy')) }" do %>
+            <%= glyph 'remove' %>
+          <%- end -%>
+        </td>
       </tr>
     <% end %>
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Donation', new_donation_path %>
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_donation_path,
+            :class => 'btn btn-primary' %>

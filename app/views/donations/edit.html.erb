@@ -1,6 +1,5 @@
-<h1>Editing donation</h1>
-
-<%= render 'form' %>
-
-<%= link_to 'Show', @donation %> |
-<%= link_to 'Back', donations_path %>
+<%- model_class = Donation -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => Donation %></h1>
+</div>
+<%= render :partial => 'form' %>
