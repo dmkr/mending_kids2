@@ -15,6 +15,9 @@ class DonationsController < ApplicationController
   # GET /donations/new
   def new
     @donation = Donation.new
+    @donor = Donor.all()
+    # @donorcities_array = City.all.map { |city| [city.name, city.id] } %>
+    Rails.logger.debug(@donor)
   end
 
   # GET /donations/1/edit
@@ -26,6 +29,18 @@ class DonationsController < ApplicationController
   def create
     @donation = Donation.new(donation_params)
 
+    @inventory = Inventory.find_by(item_description: @donation.item_description)
+
+    if @inventory.nil?
+      @inventory = Inventory.new
+      @inventory.item_description = @donation.item_description
+      @inventory.quantity = @donation.quantity
+    else
+      @inventory.quantity = @inventory.quantity + @donation.quantity
+    end
+    @inventory.save
+    # @donation.donor_id = params[:donor_id]
+    # Rails.logger.debug(params[:donor_id].value)
     respond_to do |format|
       if @donation.save
         format.html { redirect_to @donation, notice: 'Donation was successfully created.' }

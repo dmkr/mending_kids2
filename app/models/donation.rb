@@ -1,4 +1,4 @@
 class Donation < ActiveRecord::Base
-  belongs_to :donor
+  has_one :donor
   belongs_to :inventory
 end

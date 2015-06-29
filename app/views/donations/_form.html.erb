@@ -5,6 +5,14 @@
       <%= f.text_field :item_description, :class => 'text-field form-control' %>
     </div>
   </div>
+    <div class="form-group">
+      <%= f.label :donor_id, :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <!--:author_id, Author.all, :id, :name_with_initial, prompt: true-->
+        <%= f.collection_select( :donor_id, Donor.all, :id, :first_name, prompt: true) %>
+      </div>
+    </div>
+
   <div class="form-group">
     <%= f.label :brand, :class => 'control-label col-md-2' %>
     <div class="col-md-10">
