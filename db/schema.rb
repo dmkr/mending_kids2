@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150628221830) do
+ActiveRecord::Schema.define(version: 20150629022135) do
 
   create_table "donations", force: true do |t|
     t.string   "item_description"
@@ -54,6 +54,21 @@ ActiveRecord::Schema.define(version: 20150628221830) do
 
   add_index "inventories_missions", ["inventory_id"], name: "index_inventories_missions_on_inventory_id"
   add_index "inventories_missions", ["mission_id"], name: "index_inventories_missions_on_mission_id"
+
+  create_table "mission_inventories", force: true do |t|
+    t.string   "item_description"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "mission_inventory_missions", force: true do |t|
+    t.integer "mission_inventory_id"
+    t.integer "mission_id"
+  end
+
+  add_index "mission_inventory_missions", ["mission_id"], name: "index_mission_inventory_missions_on_mission_id"
+  add_index "mission_inventory_missions", ["mission_inventory_id"], name: "index_mission_inventory_missions_on_mission_inventory_id"
 
   create_table "missions", force: true do |t|
     t.string   "location"

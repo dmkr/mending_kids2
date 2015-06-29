@@ -8,6 +8,7 @@
       <span class="icon-bar"></span>
     </button>
     <%= link_to "My Application", defined?(root_path) ? root_path : "#", class: "navbar-brand" %>
+
   </div>
 
   <!-- Collect the nav links, forms, and other content for toggling -->
@@ -15,6 +16,10 @@
     <ul class="nav navbar-nav">
     </ul>
     <ul class="nav navbar-nav navbar-right">
+      <li class = "dropdown"><%= link_to "Inventory", "inventories", class: "navbar-brand" %>
+      <li class = "dropdown"><%= link_to "Donors", "donors", class: "navbar-brand" %>
+      <li class = "dropdown"><%= link_to "Donations", "donations", class: "navbar-brand" %>
+      </li>
       <% if defined?(Devise) %>
         <% if user_signed_in? %>
           <li class="dropdown">

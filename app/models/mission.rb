@@ -1,3 +1,3 @@
 class Mission < ActiveRecord::Base
-  has_and_belongs_to_many :inventories
+  has_many :mission_inventories
 end
