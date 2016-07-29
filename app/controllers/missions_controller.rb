@@ -10,6 +10,10 @@ class MissionsController < ApplicationController
   # GET /missions/1
   # GET /missions/1.json
   def show
+
+    @inventory = MissionInventory.where(:mission_id => @mission.id)
+    Rails.logger.debug(@inventory.is_a?(MissionInventory::ActiveRecord_Relation).to_s)
+    # Rails.logger.debug(@inventory.inspect)
   end
 
   # GET /missions/new

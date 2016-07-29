@@ -3,8 +3,20 @@
   <h1><%=t '.title', :default => Donation %></h1>
 </div>
 
+  <% @missioninv = MissionInventory.where(lot_number:  @donation.lot_number, item_description: @donation.item_description)%>
+    <%subtractor = 0%>
+    <%if @missioninv.nil?%>
+        <%subtractor = 0%>
+    <%else%>
+    <% @missioninv.each do |x|%>
+    <%subtractor = subtractor + x.quantity %>
+    <%end%>
+    <%end%>
+
 <div class="fieldset">
   <dl>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:category) %></dt>
+      <dd><pre class="prettyprint"><%= @donation.category %></pre></dd>
       <dt class="label label-default"><%= model_class.human_attribute_name(:item_description) %></dt>
       <dd><pre class="prettyprint"><%= @donation.item_description %></pre></dd>
       <dt class="label label-default"><%= model_class.human_attribute_name(:brand) %></dt>
@@ -19,8 +31,14 @@
       <dd><pre class="prettyprint"><%= @donation.mk_cost %></pre></dd>
       <dt class="label label-default"><%= model_class.human_attribute_name(:total_in_kind_value) %></dt>
       <dd><pre class="prettyprint"><%= @donation.total_in_kind_value %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name(:ref) %></dt>
+      <dd><pre class="prettyprint"><%= @donation.ref %></pre></dd>
       <dt class="label label-default"><%= model_class.human_attribute_name(:quantity) %></dt>
       <dd><pre class="prettyprint"><%= @donation.quantity %></pre></dd>
+       <dt class="label label-default">Number remaining</dt>
+      <dd><pre class="prettyprint"><%= @donation.quantity - subtractor %></pre></dd>
+      <dt class="label label-default"><%= model_class.human_attribute_name("Unit of measurement") %></dt>
+      <dd><pre class="prettyprint"><%= @donation.uom %></pre></dd>
   </dl>
 </div>
 
@@ -29,6 +47,11 @@
               donations_path, :class => 'btn btn-default'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_donation_path(@donation), :class => 'btn btn-default' %>
+
+  <%= link_to t("Attach to mission"),
+            new_mission_inventory_path(inventory_id: @donation.id),
+            :class => 'btn btn-primary' %>           
+
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               donation_path(@donation),
               :method => 'delete',

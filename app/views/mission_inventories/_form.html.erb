@@ -1,0 +1,74 @@
+<%= form_for @mission_inventory, :html => { :class => 'form-horizontal form-model' } do |f| %>
+<div class="form-group">
+  </div>
+  <div class="form-group">
+    <%= f.label :item_description, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%Rails.logger.debug(@inventory)%>
+      <%unless @inventory.item_description.nil?%>
+      <%= f.text_field :item_description, :class => 'text-field form-control' , :value => @inventory.item_description%>
+      <%end%>
+    </div>
+  </div>
+
+
+  <div class="form-group">
+    <%= f.label :brand, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.text_field :brand, :class => 'text-field form-control', :value => @donation.brand %>
+    </div>
+  </div>
+    <div class="form-group">
+      <%= f.label :mission_id, :class => 'control-label col-md-2' %>
+      <div class="col-md-10">
+        <!--:author_id, Author.all, :id, :name_with_initial, prompt: true-->
+        <%= f.collection_select( :mission_id, Mission.all, :id, :location, prompt: true) %>
+      </div>
+    </div>
+
+
+  <div class="form-group">
+    <%= f.label :lot_number, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+      <%= f.select( :lot_number, options_for_select(@ary), :class => 'text-field form-control') %>
+    </div>
+  </div>
+ 
+
+  <div class="form-group">
+    <%= f.label :quantity, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+    <%if @edit == false%>
+      <%= f.select :quantity, options_for_select(0..@quantity, @inventory.quantity), :class => 'text-field form-control' %>
+    <%else%>
+    <%= f.select :quantity, options_for_select(0..(@inventory.quantity+@quantity), @inventory.quantity ), :class => 'text-field form-control' %>
+    <%end%>
+    </div>
+  </div>
+
+<div class="form-group">
+    <%= f.label :expiration_date, :class => 'control-label col-md-2' %>
+    <div class="col-md-10">
+     
+     <%if !(@donation.expiration_date.nil?)%>
+      <%= f.date_select :expiration_date, :class => 'text-field form-control', default: {day: @donation.expiration_date.day, month:@donation.expiration_date.month, year:@donation.expiration_date.year} %>
+      <%=check_box_tag "checker"%>
+      <%else%>
+      
+      <%=check_box_tag "checker" , "1", true%>
+      
+      <%end%>
+     No Expiration
+    </div>
+   
+  </div>
+
+
+  <div class="form-group">
+    <div class='col-md-offset-2 col-md-10'>
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+      <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                  donations_path, :class => 'btn btn-default' %>
+    </div>
+  </div>
+<% end %>

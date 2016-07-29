@@ -17,6 +17,10 @@
               inventories_path, :class => 'btn btn-default'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_inventory_path(@inventory), :class => 'btn btn-default' %>
+  <%= link_to t("Attach to mission"),
+            new_mission_inventory_path(inventory_description: @inventory.item_description),
+            :class => 'btn btn-primary' %>           
+
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
               inventory_path(@inventory),
               :method => 'delete',

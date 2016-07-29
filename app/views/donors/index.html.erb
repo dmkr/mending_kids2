@@ -35,6 +35,7 @@
       </tr>
     <% end %>
   </tbody>
+  <%= will_paginate @donors %>
 </table>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
