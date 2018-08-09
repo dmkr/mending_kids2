@@ -34,9 +34,14 @@
           <td><%= donation.lot_number %></td>
          
           <td><%= donation.quantity %></td>
+	  <%if  @donationer.nil?%>
+          	<td></td>
+          <%else%>
           <td><%= @donationer.uom %></td>
+          <%end%>
+
           <%if donation.expiration_date.nil?%>
-          <td> N/A </td>td>
+          	<td> N/A </td>
           <%else%>
           <td><%=l donation.expiration_date.to_date, format: :long %></td>
           <%end%>
